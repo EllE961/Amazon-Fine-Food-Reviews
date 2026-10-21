@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import re
@@ -10,8 +11,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 
-# Load data (sampling for speed)
-df = pd.read_csv("/kaggle/input/amazon-fine-food-reviews/Reviews.csv")
+# Load data (Kaggle input folder when run there, otherwise ./data)
+DATA_PATH = "/kaggle/input/amazon-fine-food-reviews/Reviews.csv"
+if not os.path.exists(DATA_PATH):
+    DATA_PATH = os.path.join("data", "Reviews.csv")
+df = pd.read_csv(DATA_PATH)
 
 # Basic info
 print("Shape:", df.shape)
